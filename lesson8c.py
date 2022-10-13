@@ -52,6 +52,7 @@ class Account:
                 print(f'Your Previous Balance was {self.check_balance()}')
                 self.balance = self.balance + amount_to_deposit
                 print(f'Your Current Balance is {self.balance}')
+                return self.balance
 
             else:
                 print("Your Account is Inactive")
@@ -63,11 +64,27 @@ class Account:
     # Exception Handling in Python
 
     # Should retain an anitial deposit = 100
-    #
+    def withdraw(self):
+        INITIAL_DEPOSIT = 100
+        amount_to_widthdraw = int(input("Enter the Amount to withdraw...: "))
 
+        if amount_to_widthdraw > self.balance:
+            print("The Amount Exceeds Balance in the Account")
+        elif (self.balance-amount_to_widthdraw) < INITIAL_DEPOSIT:
+            print("You should retain an initial deposit of 100Ksh")
+        else:
+            if self.status == "active":
+                print("Thank You for widthdrawing...")
+                print("You have withdrawn {}".format(amount_to_widthdraw))
+                self.balance = self.balance - amount_to_widthdraw
+                print("Your current Balance is now {}".format(self.balance))
+                return self.balance
+            else:
+                print("Visit Nearest Branch to activate Your Account")
 
 
 account = Account(100, "12345", "Erick Otieno", "Westlands", "active")
 
 account.check_balance()
 account.deposit(10000)
+account.withdraw()
